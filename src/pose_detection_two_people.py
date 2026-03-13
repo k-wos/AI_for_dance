@@ -7,7 +7,7 @@ from mediapipe.tasks.python import vision
 
 # --- KONFIGURACJA ---
 MODEL_PATH = "models/pose_landmarker_multi.task"
-VIDEO_PATH = "videos/raw/dance1.mp4"
+VIDEO_PATH = "videos/raw/dance3.mp4"
 OUTPUT_CSV = "taniec_dane.csv"
 
 # Inicjalizacja MediaPipe
@@ -25,19 +25,19 @@ options = PoseLandmarkerOptions(
     min_tracking_confidence=0.5
 )
 
-# Tracker: przechowuje ostatnie dane osób {id: {"landmarks": [], "center": (x,y), "lost_frames": 0}}
+
 trackers = {
     0: {"landmarks": None, "center": None, "lost_frames": 0, "color": (0, 255, 0)},
     1: {"landmarks": None, "center": None, "lost_frames": 0, "color": (255, 0, 0)}
 }
 
 def get_center(landmarks, w, h):
-    # Środek bioder (punkt 23 i 24) jest najstabilniejszy w tańcu
+    
     cx = int(((landmarks[23].x + landmarks[24].x) / 2) * w)
     cy = int(((landmarks[23].y + landmarks[24].y) / 2) * h)
     return (cx, cy)
 
-# Przygotowanie pliku CSV
+
 header = ['frame', 'person_id']
 for i in range(33):
     header.extend([f'lm{i}_x', f'lm{i}_y', f'lm{i}_z', f'lm{i}_vis'])
@@ -67,11 +67,11 @@ with open(OUTPUT_CSV, mode='w', newline='') as f:
                 for pose in result.pose_landmarks:
                     current_dets.append({"lms": pose, "center": get_center(pose, w, h)})
 
-            # DOPASOWANIE (Główna logika)
+
             used_dets = set()
             used_tids = set()
             
-            # 1. Próbuj dopasować obecne wykrycia do tego co pamiętamy
+            
             matches = []
             for d_idx, det in enumerate(current_dets):
                 for t_id, t_data in trackers.items():
@@ -79,7 +79,7 @@ with open(OUTPUT_CSV, mode='w', newline='') as f:
                         dist = ((det["center"][0]-t_data["center"][0])**2 + (det["center"][1]-t_data["center"][1])**2)**0.5
                         matches.append((dist, d_idx, t_id))
             
-            matches.sort() # Najbliższe pary pierwsze
+            matches.sort() 
 
             for d, d_idx, t_id in matches:
                 if d_idx not in used_dets and t_id not in used_tids and d < 200:
@@ -89,7 +89,6 @@ with open(OUTPUT_CSV, mode='w', newline='') as f:
                     used_dets.add(d_idx)
                     used_tids.add(t_id)
 
-            # 2. Jeśli ktoś został, a tracker jest wolny - przypisz
             for d_idx, det in enumerate(current_dets):
                 if d_idx not in used_dets:
                     for t_id in trackers:
@@ -100,24 +99,22 @@ with open(OUTPUT_CSV, mode='w', newline='') as f:
                             used_tids.add(t_id)
                             break
 
-            # RYSOWANIE I ZAPIS
+
             for t_id, t_data in trackers.items():
                 if t_id not in used_tids:
                     t_data["lost_frames"] += 1
                 
                 if t_data["landmarks"] is not None:
-                    # Jeśli osoba zniknęła (lost_frames > 0), rysuj na szaro (duch)
+                    
                     is_lost = t_data["lost_frames"] > 0
                     color = (128, 128, 128) if is_lost else t_data["color"]
                     
-                    # Zapis do CSV (tylko jeśli osoba jest aktualnie widziana)
                     if not is_lost:
                         row = [frame_idx, t_id]
                         for lm in t_data["landmarks"]:
                             row.extend([lm.x, lm.y, lm.z, lm.visibility])
                         writer.writerow(row)
 
-                    # Rysowanie na ekranie
                     for lm in t_data["landmarks"]:
                         cv2.circle(frame, (int(lm.x*w), int(lm.y*h)), 3, color, -1)
                     
