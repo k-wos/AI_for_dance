@@ -1,0 +1,205 @@
+{
+  "feature_names": [
+    "motion__left_knee_angle_deg__mean",
+    "motion__left_knee_angle_deg__std",
+    "motion__left_knee_angle_deg__p10",
+    "motion__left_knee_angle_deg__p90",
+    "motion__right_knee_angle_deg__mean",
+    "motion__right_knee_angle_deg__std",
+    "motion__right_knee_angle_deg__p10",
+    "motion__right_knee_angle_deg__p90",
+    "motion__knee_asymmetry_deg__mean",
+    "motion__knee_asymmetry_deg__std",
+    "motion__knee_asymmetry_deg__p10",
+    "motion__knee_asymmetry_deg__p90",
+    "motion__left_hip_angle_deg__mean",
+    "motion__left_hip_angle_deg__std",
+    "motion__left_hip_angle_deg__p10",
+    "motion__left_hip_angle_deg__p90",
+    "motion__right_hip_angle_deg__mean",
+    "motion__right_hip_angle_deg__std",
+    "motion__right_hip_angle_deg__p10",
+    "motion__right_hip_angle_deg__p90",
+    "motion__shoulder_tilt_deg__mean",
+    "motion__shoulder_tilt_deg__std",
+    "motion__shoulder_tilt_deg__p10",
+    "motion__shoulder_tilt_deg__p90",
+    "motion__pelvis_tilt_deg__mean",
+    "motion__pelvis_tilt_deg__std",
+    "motion__pelvis_tilt_deg__p10",
+    "motion__pelvis_tilt_deg__p90",
+    "motion__torso_lean_deg__mean",
+    "motion__torso_lean_deg__std",
+    "motion__torso_lean_deg__p10",
+    "motion__torso_lean_deg__p90",
+    "motion__pelvis_yaw_deg__mean",
+    "motion__pelvis_yaw_deg__std",
+    "motion__pelvis_yaw_deg__p10",
+    "motion__pelvis_yaw_deg__p90",
+    "motion__pelvis_rotation_speed_deg_s__mean",
+    "motion__pelvis_rotation_speed_deg_s__std",
+    "motion__pelvis_rotation_speed_deg_s__p10",
+    "motion__pelvis_rotation_speed_deg_s__p90",
+    "motion__left_ankle_speed_body_s__mean",
+    "motion__left_ankle_speed_body_s__std",
+    "motion__left_ankle_speed_body_s__p10",
+    "motion__left_ankle_speed_body_s__p90",
+    "motion__right_ankle_speed_body_s__mean",
+    "motion__right_ankle_speed_body_s__std",
+    "motion__right_ankle_speed_body_s__p10",
+    "motion__right_ankle_speed_body_s__p90",
+    "motion__left_wrist_speed_body_s__mean",
+    "motion__left_wrist_speed_body_s__std",
+    "motion__left_wrist_speed_body_s__p10",
+    "motion__left_wrist_speed_body_s__p90",
+    "motion__right_wrist_speed_body_s__mean",
+    "motion__right_wrist_speed_body_s__std",
+    "motion__right_wrist_speed_body_s__p10",
+    "motion__right_wrist_speed_body_s__p90",
+    "motion__center_speed_body_s__mean",
+    "motion__center_speed_body_s__std",
+    "motion__center_speed_body_s__p10",
+    "motion__center_speed_body_s__p90",
+    "motion__balance_offset_body__mean",
+    "motion__balance_offset_body__std",
+    "motion__balance_offset_body__p10",
+    "motion__balance_offset_body__p90",
+    "motion__step_width_body__mean",
+    "motion__step_width_body__std",
+    "motion__step_width_body__p10",
+    "motion__step_width_body__p90",
+    "motion__motion_intensity__mean",
+    "motion__motion_intensity__std",
+    "motion__motion_intensity__p10",
+    "motion__motion_intensity__p90",
+    "motion__motion_envelope__mean",
+    "motion__motion_envelope__std",
+    "motion__motion_envelope__p10",
+    "motion__motion_envelope__p90",
+    "motion__usable_frame_ratio",
+    "motion__dominant_motion_frequency_hz",
+    "audio__raw_tempo_bpm",
+    "audio__adjusted_tempo_bpm",
+    "audio__tempo_in_range",
+    "audio__synchronization_ratio",
+    "audio__mean_absolute_offset_seconds",
+    "audio__mean_signed_offset_seconds",
+    "audio__audio_rms_mean",
+    "dance__cha_cha",
+    "dance__rumba"
+  ],
+  "targets": [
+    "technical_score",
+    "rhythm_score"
+  ],
+  "trained_at_utc": "2026-09-08T11:12:17.568393+00:00",
+  "training_samples": 9,
+  "recording_ids": [
+    "v1",
+    "v2",
+    "v3",
+    "v4",
+    "v5",
+    "v6",
+    "v7",
+    "v8",
+    "v9"
+  ],
+  "technical_score_range": [
+    2.0,
+    9.0
+  ],
+  "rhythm_score_range": [
+    3.0,
+    9.0
+  ],
+  "validation_mae": {
+    "technical": 1.7783333333333333,
+    "rhythm": 1.5149999999999997
+  },
+  "validation_metrics": {
+    "technical": {
+      "mae": 1.7783333333333333,
+      "rmse": 2.1855164022364244,
+      "spearman": -0.21098736814243052,
+      "icc_a1": -0.06442443430146903,
+      "bias_model_minus_trainer": -0.23222222222222205,
+      "loa_lower": -4.749958078298557,
+      "loa_upper": 4.285513633854113
+    },
+    "rhythm": {
+      "mae": 1.5149999999999997,
+      "rmse": 1.8103107468056416,
+      "spearman": 0.0,
+      "icc_a1": 0.04641431719023074,
+      "bias_model_minus_trainer": -0.04666666666666676,
+      "loa_lower": -3.808860054173481,
+      "loa_upper": 3.7155267208401472
+    }
+  },
+  "out_of_fold_predictions": [
+    {
+      "recording_id": "v1",
+      "technical_trainer": 5.0,
+      "technical_model": 3.3725,
+      "rhythm_trainer": 6.0,
+      "rhythm_model": 4.7675
+    },
+    {
+      "recording_id": "v2",
+      "technical_trainer": 6.0,
+      "technical_model": 4.8375,
+      "rhythm_trainer": 8.0,
+      "rhythm_model": 6.44
+    },
+    {
+      "recording_id": "v3",
+      "technical_trainer": 5.0,
+      "technical_model": 3.74,
+      "rhythm_trainer": 5.0,
+      "rhythm_model": 6.7725
+    },
+    {
+      "recording_id": "v4",
+      "technical_trainer": 4.0,
+      "technical_model": 4.9725,
+      "rhythm_trainer": 7.0,
+      "rhythm_model": 6.79
+    },
+    {
+      "recording_id": "v5",
+      "technical_trainer": 2.0,
+      "technical_model": 4.155,
+      "rhythm_trainer": 5.0,
+      "rhythm_model": 6.0325
+    },
+    {
+      "recording_id": "v6",
+      "technical_trainer": 9.0,
+      "technical_model": 4.0025,
+      "rhythm_trainer": 9.0,
+      "rhythm_model": 6.33
+    },
+    {
+      "recording_id": "v7",
+      "technical_trainer": 2.0,
+      "technical_model": 4.3025,
+      "rhythm_trainer": 7.0,
+      "rhythm_model": 5.645
+    },
+    {
+      "recording_id": "v8",
+      "technical_trainer": 3.0,
+      "technical_model": 4.1925,
+      "rhythm_trainer": 5.0,
+      "rhythm_model": 5.305
+    },
+    {
+      "recording_id": "v9",
+      "technical_trainer": 4.0,
+      "technical_model": 4.335,
+      "rhythm_trainer": 3.0,
+      "rhythm_model": 6.4975
+    }
+  ]
+}

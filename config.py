@@ -1,5 +1,0 @@
-VIDEO_FOLDER = "videos/raw"
-POSE_DATA_FOLDER = "data/poses"
-FEATURE_FOLDER = "data/features"
-MODEL_FOLDER = "models"
-RESULT_FOLDER = "results"
